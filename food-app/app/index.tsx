@@ -10,6 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import { router } from "expo-router";
+import Carousel from 'react-native-reanimated-carousel';
 
 const index = () => {
   const image = require("../assets/images/img4.jpg");
@@ -30,8 +31,8 @@ const index = () => {
           recommendations, and enjoy a seamless ordering experience. With Yumly,
           satisfying your cravings has never been easier
         </Text>
-        <TouchableOpacity onPress={()=>router.navigate('/signIn')} className=" h-[50px] w-[300px] rounded-[100px] bg-white items-center mt-7 pt-2">
-          <Text className=" text-2xl font-roboto2 ">
+        <TouchableOpacity onPress={()=>router.navigate('/(tabs)/home')} className=" h-[50px] w-[300px] rounded-[100px] bg-white items-center mt-7 pt-2">
+          <Text className=" text-2xl font-pmedium ">
             Get Start
           </Text>
         </TouchableOpacity>

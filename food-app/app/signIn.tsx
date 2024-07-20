@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, Image, TextInput, TouchableOpacity, ScrollView } from "react-native";
 import React from "react";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 
 const SignIn = () => {
   const image = require("../assets/images/img3.jpg");
@@ -48,7 +48,7 @@ text-base "
           />
         </View>
       </View>
-      <TouchableOpacity className=" h-[50px] w-[350px] rounded-2xl bg-white items-center mt-5 pt-2 ml-[32px]">
+      <TouchableOpacity onPress={()=>router.navigate("/home")} className=" h-[50px] w-[350px] rounded-2xl bg-white items-center mt-5 pt-2 ml-[32px]">
           <Text className=" text-xl font-psemibold ">
             Sign In
           </Text>
