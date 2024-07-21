@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  TextInput,
-  Image,
-} from "react-native";
+import { View, Text, ScrollView, TextInput, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
@@ -20,6 +14,7 @@ const Home = () => {
   const image4 = require("../../assets/images/springRoll1.png");
   const image5 = require("../../assets/images/milkShack1.png");
   const image6 = require("../../assets/images/noodle1.png");
+  const delivery = require("../../assets/images/delivery.png");
 
   const width = 390;
   const list = [
@@ -63,13 +58,13 @@ const Home = () => {
           </Text>
           <Text className="text-white font-psemibold text-3xl ml-3">Jacob</Text>
           <View className="absolute ml-[355px] mt-5">
-          <Ionicons name="notifications" size={24} color="white" />
+            <Ionicons name="notifications" size={24} color="white" />
           </View>
           <FormField
-          marginTop="mt-5"
-          placeholder="Search Here"
-          isSetIcon={true}
-          icon="search"
+            marginTop="mt-5"
+            placeholder="Search Here"
+            isSetIcon={true}
+            icon="search"
           />
           <View className="flex-1 mt-2 px-3">
             <Carousel
@@ -116,9 +111,27 @@ const Home = () => {
             price1="3$"
             price2="6$"
             image1={image5}
-            image2={image4}
+            image2={image6}
           />
-          <View className="h-[100px]"></View>
+          <View className="h-[200px] w-[390px] ml-3 rounded-xl bg-yellow-500 mt-6 mb-[100px]">
+            <View className="flex-row justify-center items-center">
+              <View>
+                <Text className="text-white font-pbold text-xl ml-16 w-[130px]">
+                  The Fastest food
+                </Text>
+              </View>
+              <Text className="-ml-[72px] mt-8 text-red-600 font-pbold text-xl">
+                Delivery
+              </Text>
+              <View className="-ml-8">
+                <Image
+                  source={delivery}
+                  resizeMode="contain"
+                  className="w-[250px] h-[200px] mr-6"
+                />
+              </View>
+            </View>
+          </View>
         </ScrollView>
       </SafeAreaView>
     </LinearGradient>

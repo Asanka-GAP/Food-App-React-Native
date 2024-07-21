@@ -22,6 +22,7 @@ const FormField = ({placeholder,marginTop,isSetIcon,icon,title}:FormFieldProps) 
             placeholder={placeholder}
             placeholderTextColor="#7b7b8b"
             className="w-full flex-1 text-white font-psemibold text-base "
+            secureTextEntry={title==="Password" && !showPassword}
           />
           {isSetIcon && (
         <Ionicons name={icon} size={24} color="gray" />
