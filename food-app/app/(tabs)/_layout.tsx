@@ -18,11 +18,11 @@ const TabLayout = () => {
           className="text-black font-pmedium">Home</Text>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>router.navigate("/bookmark")}>
+        <TouchableOpacity onPress={()=>router.navigate("/favorite")}>
         <View className="items-center">
         <Ionicons name="bookmark" size={24} color="black" />
           <Text
-          className="text-black font-pmedium">Bookmark</Text>
+          className="text-black font-pmedium">Favorite</Text>
         </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=>router.navigate("/profile")}>

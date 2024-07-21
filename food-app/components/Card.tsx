@@ -1,5 +1,5 @@
-import { View, Text, Image } from 'react-native'
-import React from 'react'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
 import { BlurView } from 'expo-blur'
 import { Ionicons } from '@expo/vector-icons'
 
@@ -15,17 +15,27 @@ interface CardProps{
 }
 
 const Card = ({title1,subtitle1,title2,subtitle2,price1,price2,image1,image2}:CardProps) => {
+  
+  const [like1, setLike1] = useState(false);
+  const [like2, setLike2] = useState(false);
+  const [isAddedToCart1, setIsAddedToCart1] = useState(false)
+  const [isAddedToCart2, setIsAddedToCart2] = useState(false)
+
   return (
     <View className="flex-row justify-center items-center -ml-2">
             <BlurView
               intensity={18}
               className="ml-4 px-1 border-2 items-center border-gray-500 mt-10 w-[180px] h-[250px]"
             >
-              <View className="flex-row mt-1">
+              <View className="flex-row mt-1 z-10">
                 <View className="mr-28">
-                  <Ionicons name="heart" size={24} color="white" />
+                  <TouchableOpacity onPress={()=>setLike1(!like1)}>
+                  <Ionicons name={like1?"heart":"heart-outline"} size={24} color={like1?"red":"white"} />
+                  </TouchableOpacity>
                 </View>
-                <Ionicons name="cart" size={24} color="white" />
+                <TouchableOpacity onPress={()=>setIsAddedToCart1(!isAddedToCart1)}>
+                <Ionicons name={isAddedToCart1?"cart":"cart-outline"} size={26} color={isAddedToCart1?"orange":"white"} />
+                </TouchableOpacity>
               </View>
               <Image
                 source={image1}
@@ -46,11 +56,15 @@ const Card = ({title1,subtitle1,title2,subtitle2,price1,price2,image1,image2}:Ca
               intensity={18}
               className="ml-4 px-1 border-2 items-center border-gray-500 mt-10 w-[180px] h-[250px]"
             >
-              <View className="flex-row mt-1">
+              <View className="flex-row mt-1 z-10">
                 <View className="mr-28">
-                  <Ionicons name="heart" size={24} color="white" />
+                <TouchableOpacity onPress={()=>setLike2(!like2)}>
+                  <Ionicons name={like2?"heart":"heart-outline"} size={24} color={like2?"red":"white"} />
+                  </TouchableOpacity>
                 </View>
-                <Ionicons name="cart" size={24} color="white" />
+                <TouchableOpacity onPress={()=>setIsAddedToCart2(!isAddedToCart2)}>
+                <Ionicons name={isAddedToCart2?"cart":"cart-outline"} size={26} color={isAddedToCart2?"orange":"white"} />
+                </TouchableOpacity>
               </View>
               <Image
                 source={image2}

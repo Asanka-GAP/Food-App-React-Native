@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, TextInput, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import React from "react";
+import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import Carousel from "react-native-reanimated-carousel";
 import { LinearGradient } from "expo-linear-gradient";
@@ -16,6 +16,7 @@ const Home = () => {
   const image6 = require("../../assets/images/noodle1.png");
   const delivery = require("../../assets/images/delivery.png");
 
+  
   const width = 390;
   const list = [
     {
