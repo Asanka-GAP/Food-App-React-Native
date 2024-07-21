@@ -26,7 +26,7 @@ const index = () => {
           recommendations, and enjoy a seamless ordering experience. With Yumly,
           satisfying your cravings has never been easier
         </Text>
-        <TouchableOpacity onPress={()=>router.navigate('/(tabs)/home')} className=" h-[50px] w-[300px] rounded-[100px] bg-white items-center mt-7 pt-2">
+        <TouchableOpacity onPress={()=>router.navigate('/signIn')} className=" h-[50px] w-[300px] rounded-[100px] bg-white items-center mt-7 pt-2">
           <Text className=" text-2xl font-pmedium ">
             Get Start
           </Text>

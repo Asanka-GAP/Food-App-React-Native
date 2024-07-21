@@ -3,16 +3,15 @@ import {
   Text,
   ScrollView,
   TextInput,
-  Dimensions,
   Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import Carousel from "react-native-reanimated-carousel";
-import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 import Card from "@/components/Card";
+import FormField from "@/components/FormField";
 
 const Home = () => {
   const image1 = require("../../assets/images/burger1.png");
@@ -59,23 +58,19 @@ const Home = () => {
     >
       <SafeAreaView className="h-full">
         <ScrollView className="h-full">
-          <Text className="text-white font-pmedium text-sm mt-3">
+          <Text className="text-white font-pmedium text-sm mt-3 ml-3">
             welcome back,
           </Text>
-          <Text className="text-white font-psemibold text-3xl">Jacob</Text>
-          <View
-            className="w-[390px] mt-4 h-16 px-4 border-2 ml-1
-      border-black-500 bg-neutral-900 rounded-2xl
-      focus:border-gray-300 items-center flex-row"
-          >
-            <TextInput
-              placeholder="Search here"
-              placeholderTextColor="#7b7b8b"
-              className="w-full flex-1 text-white font-psemibold
-text-base "
-            />
-            <Ionicons name="search" size={24} color="gray" />
+          <Text className="text-white font-psemibold text-3xl ml-3">Jacob</Text>
+          <View className="absolute ml-[355px] mt-5">
+          <Ionicons name="notifications" size={24} color="white" />
           </View>
+          <FormField
+          marginTop="mt-5"
+          placeholder="Search Here"
+          isSetIcon={true}
+          icon="search"
+          />
           <View className="flex-1 mt-2 px-3">
             <Carousel
               width={width}
