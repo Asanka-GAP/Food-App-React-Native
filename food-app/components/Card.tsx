@@ -15,7 +15,6 @@ interface CardProps{
 }
 
 const Card = ({title1,subtitle1,title2,subtitle2,price1,price2,image1,image2}:CardProps) => {
-  
   const [like1, setLike1] = useState(false);
   const [like2, setLike2] = useState(false);
   const [isAddedToCart1, setIsAddedToCart1] = useState(false)
