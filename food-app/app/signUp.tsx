@@ -10,8 +10,14 @@ import {
 import React from "react";
 import { Link } from "expo-router";
 import FormField from "@/components/FormField";
+import { createUser } from "@/lib/appwrite";
 
 const SignUp = () => {
+
+const submit =() =>{
+  createUser();
+}
+
   const image = require("../assets/images/img6.jpg");
   return (
     <SafeAreaView className="bg-black h-fll w-full">
@@ -56,7 +62,7 @@ const SignUp = () => {
               isSetIcon={true}
             />
           </View>
-          <TouchableOpacity className=" h-[50px] w-[350px] rounded-2xl bg-white items-center mt-5 pt-2 ml-[32px]">
+          <TouchableOpacity onPress={submit} className=" h-[50px] w-[350px] rounded-2xl bg-white items-center mt-5 pt-2 ml-[32px]">
             <Text className=" text-xl font-psemibold ">Sign Up</Text>
           </TouchableOpacity>
           <View className="flex-row items-center justify-center gap-2 mt-[1px]">
