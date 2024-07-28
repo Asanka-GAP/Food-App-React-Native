@@ -9,9 +9,10 @@ interface FormFieldProps{
     icon?:any
     title?:string
     handleChangeText?:any
+    value?:string
 }
 
-const FormField = ({placeholder,handleChangeText,marginTop,isSetIcon,icon,title}:FormFieldProps) => {
+const FormField = ({placeholder,handleChangeText,marginTop,isSetIcon,icon,title,value}:FormFieldProps) => {
     const [showPassword, setShowPassword] = useState(false)
   return (
     <View
@@ -21,6 +22,7 @@ const FormField = ({placeholder,handleChangeText,marginTop,isSetIcon,icon,title}
         >
           <TextInput
             placeholder={placeholder}
+            value={value}
             placeholderTextColor="#7b7b8b"
             onChangeText={handleChangeText}
             className="w-full flex-1 text-white font-psemibold text-base "
