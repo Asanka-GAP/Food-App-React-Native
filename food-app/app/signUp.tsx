@@ -7,35 +7,63 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, router } from "expo-router";
 import FormField from "@/components/FormField";
-import { initializeApp } from "@firebase/app";
+import { doc, getFirestore, setDoc } from "firebase/firestore";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
 } from "@firebase/auth";
 import { FIREBASE_AUTH } from "@/lib/firebase";
 
 const SignUp = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const auth = FIREBASE_AUTH;
 
   const submit = async () => {
+    if (!username || !email || !password || !confirmPassword) {
+      Alert.alert("Something Missing", "Please check your form again");
+      return;
+    }
+    if (password != confirmPassword) {
+      Alert.alert("Password not match", "Please check your password");
+      return;
+    }
     setLoading(true);
     try {
-      const response = await createUserWithEmailAndPassword(auth,email,password);
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      ).then(async (userCredential) => {
+        const uId = userCredential.user.uid;
+
+        const firestore = getFirestore();
+
+        await setDoc(doc(firestore, "user", uId), {
+          userId: uId,
+          name: username,
+          password: password,
+          email: email,
+        });
+      });
       console.log(response);
-      Alert.alert('SignUp process successfully');
-      router.replace('/home');
-    } catch (error:any) {
-      Alert.alert('Sign up failed',error.message)
-    }finally{
+      Alert.alert("SignUp process successfully");
+      router.push(
+        {
+          pathname:"/home",
+          params:{
+            userId:username
+          }
+        }
+      )
+    } catch (error: any) {
+      Alert.alert("Sign up failed", error.message);
+    } finally {
       setLoading(false);
     }
   };
@@ -56,7 +84,9 @@ const SignUp = () => {
             <Text className="text-white font-pregular text-[17px] ml-9">
               User Name
             </Text>
-            <FormField placeholder="User Name" />
+            <FormField placeholder="User Name"
+            handleChangeText={(text: string) => setUsername(text)}
+            />
           </View>
           <View className="w-full h-[100px]">
             <Text className="text-white font-pregular text-[17px] ml-9">
@@ -64,7 +94,7 @@ const SignUp = () => {
             </Text>
             <FormField
               placeholder="Email"
-              handleChangeText={(text:string)=>setEmail(text)}
+              handleChangeText={(text: string) => setEmail(text)}
             />
           </View>
           <View className="w-full h-[100px] ">
@@ -75,9 +105,7 @@ const SignUp = () => {
               title="Password"
               placeholder="Password"
               isSetIcon={true}
-              handleChangeText={(text: string) =>
-                setPassword(text)
-              }
+              handleChangeText={(text: string) => setPassword(text)}
             />
           </View>
           <View className="w-full h-[100px] ">
@@ -87,6 +115,7 @@ const SignUp = () => {
             <FormField
               title="Password"
               placeholder="Re enter Password"
+              handleChangeText={(text: string) => setConfirmPassword(text)}
               isSetIcon={true}
             />
           </View>

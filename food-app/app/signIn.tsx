@@ -18,6 +18,7 @@ import {
   signOut,
 } from "@firebase/auth";
 import { FIREBASE_AUTH } from "@/lib/firebase";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 const SignIn = () => {
   const [form, setForm] = useState({
@@ -36,8 +37,20 @@ const auth = FIREBASE_AUTH;
     try {
 
       const response = signInWithEmailAndPassword(auth,form.email,form.password);
-
-      router.replace("/home");
+      const docId = (await response).user.uid;
+      const db = getFirestore();
+      const docRef = doc(db,"user",docId);
+      const docSnap = await getDoc(docRef);
+      const data = docSnap.data();
+      console.log(data);
+      router.push(
+        {
+          pathname:"/home",
+          params:{
+            userId:data.name
+          }
+        }
+      )
     } catch (error: any) {
       Alert.alert("Sign in Failed", error.message);
     } finally {

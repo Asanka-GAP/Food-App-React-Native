@@ -7,9 +7,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import Card from "@/components/Card";
 import FormField from "@/components/FormField";
 import { FIREBASE_AUTH } from "@/lib/firebase";
-import { router } from "expo-router";
+import { router, useGlobalSearchParams } from "expo-router";
+
 
 const Home = () => {
+
+  const {userId} = useGlobalSearchParams();
+
   const image1 = require("../../assets/images/burger1.png");
   const image2 = require("../../assets/images/juice1.png");
   const image3 = require("../../assets/images/pizza1.png");
@@ -59,7 +63,7 @@ const Home = () => {
           <Text className="text-white font-pmedium text-sm mt-3 ml-3">
             welcome back,
           </Text>
-          <Text className="text-white font-psemibold text-3xl ml-3">Jacob</Text>
+          <Text className="text-white font-psemibold text-3xl ml-3">{userId}</Text>
           <View className="absolute ml-[325px] mt-5 flex-row space-x-4">
             <Ionicons name="notifications" size={24} color="white" />
             <TouchableOpacity onPress={()=>{FIREBASE_AUTH.signOut()
