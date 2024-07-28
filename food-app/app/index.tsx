@@ -6,8 +6,22 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
+import { useEffect, useState } from "react";
+import {onAuthStateChanged, User} from 'firebase/auth';
+import { FIREBASE_AUTH } from "@/lib/firebase";
 
 const index = () => {
+
+  const [user, setUser] = useState<User|null>(null)
+
+  useEffect(()=>{
+    onAuthStateChanged(FIREBASE_AUTH,(user)=>{
+      console.log('user',user);
+      setUser(user);
+    });
+  },[]);
+
+
   const image = require("../assets/images/img4.jpg");
   return (
     <SafeAreaView className="h-full w-full justify-center items-center">
@@ -26,7 +40,7 @@ const index = () => {
           recommendations, and enjoy a seamless ordering experience. With Yumly,
           satisfying your cravings has never been easier
         </Text>
-        <TouchableOpacity onPress={()=>router.navigate('/signIn')} className=" h-[50px] w-[300px] rounded-[100px] bg-white items-center mt-7 pt-2">
+        <TouchableOpacity onPress={user ?(()=>router.replace("/home")):()=>router.navigate('/signIn')} className=" h-[50px] w-[300px] rounded-[100px] bg-white items-center mt-7 pt-2">
           <Text className=" text-2xl font-pmedium ">
             Get Start
           </Text>

@@ -8,9 +8,10 @@ interface FormFieldProps{
     isSetIcon?:boolean
     icon?:any
     title?:string
+    handleChangeText?:any
 }
 
-const FormField = ({placeholder,marginTop,isSetIcon,icon,title}:FormFieldProps) => {
+const FormField = ({placeholder,handleChangeText,marginTop,isSetIcon,icon,title}:FormFieldProps) => {
     const [showPassword, setShowPassword] = useState(false)
   return (
     <View
@@ -21,6 +22,7 @@ const FormField = ({placeholder,marginTop,isSetIcon,icon,title}:FormFieldProps) 
           <TextInput
             placeholder={placeholder}
             placeholderTextColor="#7b7b8b"
+            onChangeText={handleChangeText}
             className="w-full flex-1 text-white font-psemibold text-base "
             secureTextEntry={title==="Password" && !showPassword}
           />

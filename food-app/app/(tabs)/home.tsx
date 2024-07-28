@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TextInput, Image } from "react-native";
+import { View, Text, ScrollView, TextInput, Image, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
@@ -6,6 +6,8 @@ import Carousel from "react-native-reanimated-carousel";
 import { LinearGradient } from "expo-linear-gradient";
 import Card from "@/components/Card";
 import FormField from "@/components/FormField";
+import { FIREBASE_AUTH } from "@/lib/firebase";
+import { router } from "expo-router";
 
 const Home = () => {
   const image1 = require("../../assets/images/burger1.png");
@@ -58,8 +60,13 @@ const Home = () => {
             welcome back,
           </Text>
           <Text className="text-white font-psemibold text-3xl ml-3">Jacob</Text>
-          <View className="absolute ml-[355px] mt-5">
+          <View className="absolute ml-[325px] mt-5 flex-row space-x-4">
             <Ionicons name="notifications" size={24} color="white" />
+            <TouchableOpacity onPress={()=>{FIREBASE_AUTH.signOut()
+              router.navigate('/signIn')
+            }}>
+            <Ionicons name="log-out-outline" size={24} color="white" />
+            </TouchableOpacity>
           </View>
           <FormField
             marginTop="mt-5"

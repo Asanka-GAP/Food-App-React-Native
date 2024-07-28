@@ -3,20 +3,42 @@ import {
   Text,
   SafeAreaView,
   Image,
-  TextInput,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from "react-native";
-import React from "react";
-import { Link } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { Link, router } from "expo-router";
 import FormField from "@/components/FormField";
-import { createUser } from "@/lib/appwrite";
+import { initializeApp } from "@firebase/app";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "@firebase/auth";
+import { FIREBASE_AUTH } from "@/lib/firebase";
 
 const SignUp = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const auth = FIREBASE_AUTH;
 
-const submit =() =>{
-  createUser();
-}
+  const submit = async () => {
+    setLoading(true);
+    try {
+      const response = await createUserWithEmailAndPassword(auth,email,password);
+      console.log(response);
+      Alert.alert('SignUp process successfully');
+      router.replace('/home');
+    } catch (error:any) {
+      Alert.alert('Sign up failed',error.message)
+    }finally{
+      setLoading(false);
+    }
+  };
 
   const image = require("../assets/images/img6.jpg");
   return (
@@ -40,7 +62,10 @@ const submit =() =>{
             <Text className="text-white font-pregular text-[17px] ml-9">
               Email
             </Text>
-            <FormField placeholder="Email" />
+            <FormField
+              placeholder="Email"
+              handleChangeText={(text:string)=>setEmail(text)}
+            />
           </View>
           <View className="w-full h-[100px] ">
             <Text className="text-white font-pregular text-[17px] ml-9">
@@ -50,6 +75,9 @@ const submit =() =>{
               title="Password"
               placeholder="Password"
               isSetIcon={true}
+              handleChangeText={(text: string) =>
+                setPassword(text)
+              }
             />
           </View>
           <View className="w-full h-[100px] ">
@@ -62,7 +90,10 @@ const submit =() =>{
               isSetIcon={true}
             />
           </View>
-          <TouchableOpacity onPress={submit} className=" h-[50px] w-[350px] rounded-2xl bg-white items-center mt-5 pt-2 ml-[32px]">
+          <TouchableOpacity
+            onPress={submit}
+            className=" h-[50px] w-[350px] rounded-2xl bg-white items-center mt-5 pt-2 ml-[32px]"
+          >
             <Text className=" text-xl font-psemibold ">Sign Up</Text>
           </TouchableOpacity>
           <View className="flex-row items-center justify-center gap-2 mt-[1px]">
