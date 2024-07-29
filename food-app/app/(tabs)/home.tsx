@@ -23,6 +23,7 @@ const Home = () => {
   const delivery = require("../../assets/images/delivery.png");
 
   
+  
   const width = 390;
   const list = [
     {
