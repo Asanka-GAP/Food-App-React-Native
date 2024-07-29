@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from '@firebase/auth';
-import {getFirestore} from 'firebase/firestore';
+import {collection, getDocs, getFirestore, query, where} from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBUNmxX8SmQixlatm9Ow4caBVq7eLygOUM",
@@ -17,3 +17,17 @@ export const FIREBASE_APP = initializeApp(firebaseConfig);
 export const FIREBASE_AUTH = getAuth(FIREBASE_APP);
 export const FIREBASE_DB = getFirestore(FIREBASE_APP);
 
+
+export const fetchCartList = async ()=>{
+  const posts = new Array();
+
+  const q = query(collection(FIREBASE_DB, "cart"), where("userId", "==", FIREBASE_AUTH.currentUser?.uid));
+
+const querySnapshot = await getDocs(q);
+querySnapshot.forEach((doc) => {
+  let postData = doc.data();
+  postData.postId = doc.id;
+  posts.push(postData);
+});
+return {posts};
+}

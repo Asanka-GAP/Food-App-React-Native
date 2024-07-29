@@ -18,7 +18,7 @@ const Home = () => {
   const image2 = require("../../assets/images/juice1.png");
   const image3 = require("../../assets/images/pizza1.png");
   const image4 = require("../../assets/images/springRoll1.png");
-  const image5 = require("../../assets/images/milkShack1.png");
+  const image5 = require("../../assets/images/img1.png");
   const image6 = require("../../assets/images/noodle1.png");
   const delivery = require("../../assets/images/delivery.png");
 
@@ -101,8 +101,8 @@ const Home = () => {
             title2="Lemon"
             subtitle1="beef buger"
             subtitle2="Lemon cocktail"
-            price1="10$"
-            price2="1$"
+            price1="10"
+            price2="1"
             image1={image1}
             image2={image2}
           />
@@ -111,8 +111,8 @@ const Home = () => {
             title2="Spring Roll"
             subtitle1="Chicken Pizza"
             subtitle2="Egg Spring Roll"
-            price1="15$"
-            price2="10$"
+            price1="15"
+            price2="10"
             image1={image3}
             image2={image4}
           />
@@ -121,8 +121,8 @@ const Home = () => {
             title2="Noodle"
             subtitle1="Choco Milk Shake"
             subtitle2="Noodle with Vegi"
-            price1="3$"
-            price2="6$"
+            price1="3"
+            price2="6"
             image1={image5}
             image2={image6}
           />

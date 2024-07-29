@@ -2,8 +2,8 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { router, Slot } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
-import { FIREBASE_AUTH } from "@/lib/firebase";
+import { collection, doc, getDoc, getDocs, getFirestore, query, where } from "firebase/firestore";
+import { FIREBASE_AUTH, FIREBASE_DB } from "@/lib/firebase";
 
 const TabLayout = () => {
   return (
@@ -31,7 +31,8 @@ const TabLayout = () => {
             <Text className="text-black font-pmedium">Profile</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => router.navigate("/cart")}>
+        <TouchableOpacity onPress={() => {
+          router.navigate("/cart")}}>
           <View className="items-center">
             <Ionicons name="cart" size={24} color="black" />
             <Text className="text-black font-pmedium">Cart</Text>
@@ -57,5 +58,7 @@ async function goProfile() {
     },
   });
 }
+
+
 
 export default TabLayout;

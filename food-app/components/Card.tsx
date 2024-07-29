@@ -79,7 +79,7 @@ const Card = ({
           {subtitle1}
         </Text>
         <Text className="text-white ml-[130px] font-pmedium text-xl mt-1">
-          {price1}
+          {`${price1}$`}
         </Text>
       </BlurView>
       <BlurView
@@ -122,7 +122,7 @@ const Card = ({
           {subtitle2}
         </Text>
         <Text className="text-white ml-[130px] font-pmedium text-xl mt-1">
-          {price2}
+        {`${price2}$`}
         </Text>
       </BlurView>
     </View>
