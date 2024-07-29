@@ -31,3 +31,17 @@ querySnapshot.forEach((doc) => {
 });
 return {posts};
 }
+
+export const fetchFavorite = async ()=>{
+  const posts = new Array();
+
+  const q = query(collection(FIREBASE_DB, "favorite"), where("userId", "==", FIREBASE_AUTH.currentUser?.uid));
+
+const querySnapshot = await getDocs(q);
+querySnapshot.forEach((doc) => {
+  let postData = doc.data();
+  postData.postId = doc.id;
+  posts.push(postData);
+});
+return {posts};
+}

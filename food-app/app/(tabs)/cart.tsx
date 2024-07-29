@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  ScrollView,
   TouchableOpacity,
   FlatList,
 } from "react-native";
@@ -15,14 +14,6 @@ import { fetchCartList } from "@/lib/firebase";
 
 const Cart = () => {
   const [posts, setPosts] = useState(new Array());
-
-  const image1 = require("../../assets/images/burger1.png");
-  const image2 = require("../../assets/images/juice1.png");
-  const image3 = require("../../assets/images/pizza1.png");
-  const image4 = require("../../assets/images/springRoll1.png");
-  const image5 = require("../../assets/images/milkShack1.png");
-  const image6 = require("../../assets/images/noodle1.png");
-  const delivery = require("../../assets/images/delivery.png");
 
   React.useEffect(() => {
     getCartList();
@@ -50,7 +41,7 @@ const Cart = () => {
               router.navigate("/home")}}
             className="absolute h-[50px] w-[250px] rounded-2xl bg-white justify-center items-center mt-3 ml-[150px]"
           >
-            <Text className=" text-lg font-psemibold ">Place Order 100$</Text>
+            <Text className=" text-lg font-psemibold ">Place Order</Text>
           </TouchableOpacity>
 
           <FlatList

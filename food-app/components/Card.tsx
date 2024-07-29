@@ -5,7 +5,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { deleteDoc, doc, getFirestore, setDoc } from "firebase/firestore";
 import { FIREBASE_AUTH, FIREBASE_DB } from "@/lib/firebase";
 import 'react-native-get-random-values';
-import uuid from 'react-native-uuid';
 
 interface CardProps {
   title1: string;
@@ -44,6 +43,11 @@ const Card = ({
             <TouchableOpacity
               onPress={() => {
                 setLike1(!like1);
+                if (!like1) {
+                  addFavorite(image1,price1,title1);
+                }else{
+                  deleteFavorite(image1);
+                }
               }}
             >
               <Ionicons
@@ -88,7 +92,13 @@ const Card = ({
       >
         <View className="flex-row mt-1 z-10">
           <View className="mr-28">
-            <TouchableOpacity onPress={() => setLike2(!like2)}>
+            <TouchableOpacity onPress={() => {setLike2(!like2)
+              if (!like2) {
+                addFavorite(image2,price2,title2);
+              }else{
+                deleteFavorite(image2);
+              }
+            }}>
               <Ionicons
                 name={like2 ? "heart" : "heart-outline"}
                 size={24}
@@ -144,8 +154,28 @@ function addToCart(image:string,price:string,title:string){
 })
 }
 
+function addFavorite(image:string,price:string,title:string){
+
+  setDoc(doc(FIREBASE_DB, "favorite",FIREBASE_AUTH.currentUser?.uid+image), {
+   image: image,
+   price: price,
+   title: title,
+   userId:FIREBASE_AUTH.currentUser?.uid
+ }).then(()=>{console.log("data added")
+   
+ }
+).catch((error)=>{
+ console.log(error);
+})
+}
+
+
 function deleteFromCart(image:string){
  deleteDoc(doc(FIREBASE_DB, "cart", FIREBASE_AUTH.currentUser?.uid+image));
 }
+
+function deleteFavorite(image:string){
+  deleteDoc(doc(FIREBASE_DB, "favorite", FIREBASE_AUTH.currentUser?.uid+image));
+ }
 
 export default Card;
